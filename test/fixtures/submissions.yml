@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  title: MyString
+  link: MyString
+  text: MyText
+  goals: 1
+  flag: false
+
+two:
+  user_id: 1
+  title: MyString
+  link: MyString
+  text: MyText
+  goals: 1
+  flag: false
