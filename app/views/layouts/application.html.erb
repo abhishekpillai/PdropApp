@@ -15,10 +15,11 @@
 	<% if user_signed_in? %>
 		Logged in as <%= current_user.email %>. <%= link_to "Not You?", destroy_user_session_url, method: :delete %>
 	<% else %>
-		<%= link_to "Sign Up", new_user_registration_url %> or <%= link_to "Sign in", new_user_session_url %>
+		<%= link_to "Sign Up", new_user_registration_url %> || <%= link_to "Sign in", new_user_session_url %> ||
+		<%= link_to_rpx "Sign in with Social", user_session_url %>
 	<% end %>
 </p>
 <%= yield %>
-
+<%= javascript_include_rpx(user_session_url) %>
 </body>
 </html>
