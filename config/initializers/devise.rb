@@ -220,6 +220,4 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
-  config.rpx_application_name = "puckdrop"
-  RPXNow.api_key = "3e7dbd9df52d9fe887a9443612c4561fdcc06ccb"
 end

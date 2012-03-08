@@ -6,7 +6,6 @@ class SubmissionsController < ApplicationController
   # GET /submissions.json
   def index
     @submissions = Submission.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @submissions }
@@ -28,7 +27,7 @@ class SubmissionsController < ApplicationController
   # GET /submissions/new.json
   def new
     @submission = Submission.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @submission }
