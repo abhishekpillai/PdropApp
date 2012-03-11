@@ -19,3 +19,12 @@
 #alert {
 	border: 1px solid red;
 }
+
+.social_sign_in img {
+	width: 150px;
+}
+
+.social_sign_in a:hover {
+	background-color: white;
+	color: orange;
+}

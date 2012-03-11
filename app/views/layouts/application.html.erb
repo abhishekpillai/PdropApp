@@ -2,6 +2,10 @@
 <html>
 <head>
   <title>PdropApp</title>
+
+  <script type="text/javascript">var _kiq = _kiq || [];</script>
+  <script type="text/javascript" src="//s3.amazonaws.com/ki.js/32573/6ln.js" async="true"></script>
+  <script type="text/javascript" charset="utf-8">_kiq.push(['identify', 'your_identifier_here']);</script>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -11,11 +15,12 @@
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
 
-<p>
+<p class="social_sign_in">
 	<% if user_signed_in? %>
-		Logged in as <%= current_user.username %>. <%= link_to "Not You?", destroy_user_session_url, method: :delete %>
+		Logged in as <%= current_user.username %>
+		(<%= current_user.total_goals %>). <%= link_to "Not You?", destroy_user_session_url, method: :delete %>
 	<% else %>
-		<%= link_to "Sign Up", new_user_registration_url %> || <%= link_to "Sign in", new_user_session_url %> || <%= link_to image_tag('sign-in-with-twitter-button-1.png'), '/auth/twitter' %>
+		<%= link_to "Sign Up", new_user_registration_url %> || <%= link_to "Sign in", new_user_session_url %> || <%= link_to image_tag('sign-in-with-twitter-button-1.png'), '/auth/twitter', :class => 'social_sign_in' %> || <%= link_to image_tag('fb-connect-large.png'), '/auth/facebook', :class => 'social_sign_in'%>
 	<% end %>
 </p>
 <%= yield %>

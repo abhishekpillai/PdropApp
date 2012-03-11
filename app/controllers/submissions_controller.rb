@@ -2,10 +2,21 @@ class SubmissionsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:show, :index]
 
+  def goals
+    @submission = Submission.find(params[:id])
+    @submission.goals += 1
+    @submission.save
+    session[:goals] << @submission.id.to_s
+    respond_to do |format|
+      format.js
+      format.html { redirect_to '/submissions'}
+      format.json { render json: @submissions }
+    end
+  end
   # GET /submissions
   # GET /submissions.json
   def index
-    @submissions = Submission.all
+    @submissions = Submission.order("goals desc")
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @submissions }
@@ -43,7 +54,7 @@ class SubmissionsController < ApplicationController
   # POST /submissions.json
   def create
     @submission = Submission.new(params[:submission])
-
+    @submission.goals = 0
     respond_to do |format|
       if @submission.save
         format.html { redirect_to @submission, notice: 'Submission was successfully created.' }

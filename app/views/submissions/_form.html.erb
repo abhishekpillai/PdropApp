@@ -11,7 +11,9 @@
     </div>
   <% end %>
 
-	<%= User.find(@submission.user_id).email %>
+  <div class="field">
+    <%= f.hidden_field :user_id %>
+  </div>  
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>
@@ -21,17 +23,10 @@
     <%= f.text_field :link %>
   </div>
   <div class="field">
-    <%= f.label :text %><br />
-    <%= f.text_area :text %>
+    <%#= f.label :text %><br />
+    <%#= f.text_area :text %>
   </div>
-  <div class="field">
-    <%= f.label :goals %><br />
-    <%= f.number_field :goals %>
-  </div>
-  <div class="field">
-    <%= f.label :flag %><br />
-    <%= f.check_box :flag %>
-  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

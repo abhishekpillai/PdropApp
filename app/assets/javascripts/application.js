@@ -13,3 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+// $("#list_submissions img").click(function () {
+// 	$("#list_submissions img").toggle();
+// });

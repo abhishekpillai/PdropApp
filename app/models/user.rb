@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   
   has_many :authentications
-  
+  has_many :submissions
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
                          :uniqueness => true }
                          
    def apply_omniauth(omniauth)
+     self.username = omniauth['info']['nickname'] if username.blank?
+     self.email = omniauth['info']['email'] if email.blank?
      authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
    end
    
@@ -21,4 +23,11 @@ class User < ActiveRecord::Base
      (authentications.empty? || !password.blank?) && super
    end
 
+   def total_goals
+     total = 0
+     self.submissions.each do |sub|
+       total += sub.goals
+     end
+     return total
+   end
 end
