@@ -2,7 +2,7 @@ PdropApp::Application.routes.draw do
   match '/auth/:provider/callback' => 'authentications#create'
   resources :authentications
 
-  devise_for :users, :controllers => { :registrations => 'registrations' }
+  devise_for :users, :controllers => { :registrations => "registrations" }
 
   root :to => 'submissions#index'
   get "submissions/:id/goal" => 'submissions#goals'
