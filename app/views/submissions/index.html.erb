@@ -1,50 +1,31 @@
-<h1>Listing submissions</h1>
+<p id="new_submission_link"> <%= link_to 'New Submission', new_submission_path %> </p>
 
-<div id="list_submissions">
-	<ul>
-		<% @submissions.each do |submission| %>
-			<% if current_user.present? && !session[:goals].include?(submission.id.to_s) %>
-		    	<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
-		    <% elsif current_user.nil? %>
-				<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
-			<% else %>
-			<% end %>
-			<h3><%= link_to submission.title, submission.link, :target => '_blank' %></h3>
-		    Total Goals: <%= submission.goals %> || <%= submission.flag %>
-			<br/><%= link_to 'Show', submission %> || <%= link_to 'Edit', edit_submission_path(submission) %> || <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
-			<hr/>
-		<% end %>
-	</ul>
-</div>
-<hr/>
-<hr/>
-
-<table border=1>
-  <tr>
-    <th>User</th>
-    <th>Title</th>
-    <th>Text</th>
-    <th>Goals</th>
-    <th>Flag</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Puckdrop</h1>
 
 <% @submissions.each do |submission| %>
-  <tr>
-    <td><%= submission.user_id %></td>
-    <td><%= link_to submission.title, submission.link %></td>
-    <td><%= submission.text %></td>
-    <td><%= submission.goals %></td>
-    <td><%= submission.flag %></td>
-    <td><%= link_to 'Show', submission %></td>
-    <td><%= link_to 'Edit', edit_submission_path(submission) %></td>
-    <td><%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+	<div id="list_submissions">
+		<ul>		
+	<!-- IF there is a user logged in and 
+		has not given any goals to the submission during the current session and 
+		if the user has not submitted this particular submission, allow them to vote up. 
+		
+		ELSIF - a user who is not logged in, is show the vote up arrow but will have to sign in or sign up before continuing
+		because of the before filter in the submissions controller -->
+		
+		<% if current_user.present? && !session[:goals].include?(submission.id.to_s) && submission.user.id != current_user.id %>
+	    	<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
+	
+	    <% elsif current_user.nil? %>
+			<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
+			
+		<% else %>
+			<!-- no voting arrow is shown -->
+		<% end %>
+		
+		<h3><%= link_to submission.title, submission.link, :target => '_blank' %></h3>
+	    Total Goals: <%= submission.goals %> || <%= submission.flag %>
+		<br/><%= link_to 'Show', submission %> || <%= link_to 'Edit', edit_submission_path(submission) %> || <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
+		
+		</ul>
+	</div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Submission', new_submission_path %>
