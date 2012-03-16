@@ -13,10 +13,15 @@ class SubmissionsController < ApplicationController
       format.json { render json: @submissions }
     end
   end
+  
   # GET /submissions
   # GET /submissions.json
   def index
-    @submissions = Submission.order("goals desc")
+    if !session[:goals].present?
+      session[:goals] = []
+    end
+    @submissions = Submission.order("goals desc").page(params[:page]).per(5)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @submissions }
@@ -38,6 +43,7 @@ class SubmissionsController < ApplicationController
   # GET /submissions/new.json
   def new
     @submission = Submission.new
+    @submission.user = current_user
     
     respond_to do |format|
       format.html # new.html.erb
@@ -54,10 +60,10 @@ class SubmissionsController < ApplicationController
   # POST /submissions.json
   def create
     @submission = Submission.new(params[:submission])
-    @submission.goals = 0
+    @submission.goals = 1
     respond_to do |format|
       if @submission.save
-        format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
+        format.html { redirect_to root_url, notice: 'Nice goal!' }
         format.json { render json: @submission, status: :created, location: @submission }
       else
         format.html { render action: "new" }

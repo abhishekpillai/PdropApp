@@ -2,9 +2,9 @@
 
 <h1>Puckdrop</h1>
 
+<ol>
 <% @submissions.each do |submission| %>
-	<div id="list_submissions">
-		<ul>		
+		<li>		
 	<!-- IF there is a user logged in and 
 		has not given any goals to the submission during the current session and 
 		if the user has not submitted this particular submission, allow them to vote up. 
@@ -12,7 +12,7 @@
 		ELSIF - a user who is not logged in, is show the vote up arrow but will have to sign in or sign up before continuing
 		because of the before filter in the submissions controller -->
 		
-		<% if current_user.present? && !session[:goals].include?(submission.id.to_s) && submission.user.id != current_user.id %>
+		<% if current_user.present? && session[:goals].present? && !session[:goals].include?(submission.id.to_s) && submission.user.id != current_user.id %>
 	    	<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
 	
 	    <% elsif current_user.nil? %>
@@ -22,10 +22,14 @@
 			<!-- no voting arrow is shown -->
 		<% end %>
 		
-		<h3><%= link_to submission.title, submission.link, :target => '_blank' %></h3>
-	    Total Goals: <%= submission.goals %> || <%= submission.flag %>
-		<br/><%= link_to 'Show', submission %> || <%= link_to 'Edit', edit_submission_path(submission) %> || <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
+		<h3><%= link_to submission.title, submission.link, :target => '_blank' %></h3><%#= submission.source(submission.link) %>
+	    <%= submission.goals %> goals by <%= submission.user.username %> || <%= submission.flag %>
 		
-		</ul>
-	</div>
+		<% if current_user.present? && current_user.admin? %>
+			<br/><%= link_to 'Show', submission %> || <%= link_to 'Edit', edit_submission_path(submission) %> || <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
+		<% end %>
+		</li>
 <% end %>
+</ol>
+
+<%= paginate @submissions %>
