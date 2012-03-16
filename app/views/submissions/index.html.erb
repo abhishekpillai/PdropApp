@@ -11,7 +11,7 @@
 		ELSIF - a user who is not logged in, is show the vote up arrow but will have to sign in or sign up before continuing
 		because of the before filter in the submissions controller -->
 		
-		<% if current_user.present? && !session[:goals].include?(submission.id.to_s) && submission.user.id != current_user.id %>
+		<% if current_user.present? && session[:goals].present? && !session[:goals].include?(submission.id.to_s) && submission.user.id != current_user.id %>
 	    	<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
 	
 	    <% elsif current_user.nil? %>
