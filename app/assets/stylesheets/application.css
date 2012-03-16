@@ -28,3 +28,7 @@
 	background-color: white;
 	color: orange;
 }
+
+#new_submission_link {
+	float: right;
+}
