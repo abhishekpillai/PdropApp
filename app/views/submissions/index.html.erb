@@ -2,15 +2,17 @@
 
 <div id="list_submissions">
 	<ul>
-		<% @submissions.each do |submission| %>
-			<% if current_user.present? && !session[:goals].include?(submission.id.to_s) %>
+		<% @submissions.each do |submission| %> 
+		<%= current_user.username %>*
+		<%= submission.user.username %>
+			<% if current_user.present? && ( (session[:goals].nil?) || (!session[:goals].nil? && !session[:goals].include?(submission.id.to_s))) && current_user.id != submission.user.id %>
 		    	<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
 		    <% elsif current_user.nil? %>
 				<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
 			<% else %>
 			<% end %>
 			<h3><%= link_to submission.title, submission.link, :target => '_blank' %></h3>
-		    Total Goals: <%= submission.goals %> || <%= submission.flag %>
+		    <%= submission.goals %> <%= submission.goals != 1 ? 'Goals' : "Goal" %> by <%= submission.user.username %> || <%= submission.flag %>
 			<br/><%= link_to 'Show', submission %> || <%= link_to 'Edit', edit_submission_path(submission) %> || <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
 			<hr/>
 		<% end %>

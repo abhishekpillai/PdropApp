@@ -55,6 +55,7 @@ class SubmissionsController < ApplicationController
   def create
     @submission = Submission.new(params[:submission])
     @submission.goals = 0
+    @submission.user = current_user
     respond_to do |format|
       if @submission.save
         format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
