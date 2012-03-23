@@ -20,7 +20,7 @@ class SubmissionsController < ApplicationController
     if !session[:goals].present?
       session[:goals] = []
     end
-    @submissions = Submission.order("goals desc").page(params[:page]).per(5)
+    @submissions = Submission.order("goals desc").page(params[:page]).per(30)
     
     respond_to do |format|
       format.html # index.html.erb
@@ -61,6 +61,7 @@ class SubmissionsController < ApplicationController
   def create
     @submission = Submission.new(params[:submission])
     @submission.goals = 1
+    
     respond_to do |format|
       if @submission.save
         format.html { redirect_to root_url, notice: 'Nice goal!' }
