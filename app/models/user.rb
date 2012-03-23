@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   
   validates :username, { :presence => true, 
                          :uniqueness => true }
-                         
+                         ;
    def apply_omniauth(omniauth)
      self.username = omniauth['info']['nickname'] if username.blank?
      self.email = omniauth['info']['email'] if email.blank?
