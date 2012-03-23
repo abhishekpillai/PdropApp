@@ -1,8 +1,23 @@
-<p id="new_submission_link"> <%= link_to 'New Submission', new_submission_path %> </p>
+<nav>
+  <ul>
+    <li class="title">PuckDrop</li>
+    <li class="submit"><%= link_to 'Submit "anything" Hockey!', new_submission_path %></li>
+    <li class="login"><% if user_signed_in? %>
+  		Logged in as <%= current_user.username %>
+  		(<%= current_user.total_goals%>) <%= link_to " Logout", destroy_user_session_url, method: :delete %>
+  	<% else %>
+  	<%= link_to "Login", new_user_session_url %></li>
+  		<% end %>
+  </ul>
+</nav>
 
-<h1>Puckdrop</h1>
+<ul id="social">
+  <li><%= link_to image_tag("Facebook.png"), :title => "Facebook" %></li>
+  <li><%= link_to image_tag("Twitter.png"), :title => "Twitter" %></li>
+</ul>
 
 <ol>
+
 <% @submissions.each do |submission| %>
 		<li>		
 	<!-- IF there is a user logged in and 
@@ -13,8 +28,9 @@
 		because of the before filter in the submissions controller -->
 		
 		<% if current_user.present? && !session[:goals].include?(submission.id.to_s) && submission.user.id != current_user.id %>
+
 	    	<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
-	
+
 	    <% elsif current_user.nil? %>
 			<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
 			
@@ -22,14 +38,13 @@
 			<!-- no voting arrow is shown -->
 		<% end %>
 		
-		<h3><%= link_to submission.title, submission.link, :target => '_blank' %></h3><%#= submission.source(submission.link) %>
-	    <%= submission.goals %> goals by <%= submission.user.username %> || <%= submission.flag %>
+		<%= link_to submission.title, submission.link, :target => '_blank' %><%#= submission.source(submission.link) %>
+	    <p class="goals"><%= submission.goals %> goals by <%= submission.user.username %> <%= submission.flag %></p>
 		
 		<% if current_user.present? && current_user.admin? %>
-			<br/><%= link_to 'Show', submission %> || <%= link_to 'Edit', edit_submission_path(submission) %> || <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
+			<br/><%= link_to 'Show', submission %> <%= link_to 'Edit', edit_submission_path(submission) %> <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
 		<% end %>
 		</li>
 <% end %>
 </ol>
-
 <%= paginate @submissions %>
