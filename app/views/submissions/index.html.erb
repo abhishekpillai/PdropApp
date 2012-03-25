@@ -39,7 +39,7 @@
 		<% end %>
 		
 		<%= link_to submission.title, submission.link, :target => '_blank' %><%#= submission.source(submission.link) %>
-	    <p class="goals"><%= submission.goals %> goals by <%= submission.user.username %> <%= submission.flag %></p>
+	    <p class="goals"><%= submission.goals %> goals by <%= submission.user.username %> <%= submission.flag %> <%= timestamp(submission.created_at) %></p>
 		
 		<% if current_user.present? && current_user.admin? %>
 			<br/><%= link_to 'Show', submission %> <%= link_to 'Edit', edit_submission_path(submission) %> <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
