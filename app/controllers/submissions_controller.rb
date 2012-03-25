@@ -20,6 +20,7 @@ class SubmissionsController < ApplicationController
     if !session[:goals].present?
       session[:goals] = []
     end
+    
     @submissions = Submission.order("goals desc").page(params[:page]).per(30)
     
     respond_to do |format|

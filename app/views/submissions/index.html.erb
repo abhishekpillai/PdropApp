@@ -28,7 +28,8 @@
 		because of the before filter in the submissions controller -->
 		
 		<% if current_user.present? && !session[:goals].include?(submission.id.to_s) && submission.user.id != current_user.id %>
-	    <%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
+		
+	    	<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
 	
 	    <% elsif current_user.nil? %>
 			<%= link_to image_tag("goal_arrow.png"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
