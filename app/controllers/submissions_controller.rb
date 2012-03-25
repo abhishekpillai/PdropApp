@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:show, :index]
+  before_filter :authenticate_user!, :except => [:show, :index, :leaderboard]
 
   def leaderboard
     @top_users = User.order("goals desc").page(params[:page]).per(10)
@@ -13,7 +13,11 @@ class SubmissionsController < ApplicationController
 # the 'goals' method adds handles the user voting up action
   def goals
     @submission = Submission.find(params[:id])
-    @submission.goals += 1
+    if current_user.id == @submission.user.id
+    
+    else
+      @submission.goals += 1
+    end
     @submission.save
     session[:goals] << @submission.id.to_s
     respond_to do |format|
@@ -71,6 +75,12 @@ class SubmissionsController < ApplicationController
   def create
     @submission = Submission.new(params[:submission])
     @submission.goals = 1
+    
+    check_http = @submission.link.split("www")
+    if check_http[0] == "http://"
+    else
+      @submission.link = "http://" + @submission.link
+    end
     
     respond_to do |format|
       if @submission.save
