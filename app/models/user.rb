@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
      self.submissions.each do |sub|
        total += sub.goals
      end
+     self.goals = total
+     self.save
      return total
    end
 end

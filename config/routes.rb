@@ -6,6 +6,7 @@ PdropApp::Application.routes.draw do
 
   root :to => 'submissions#index'
   get "submissions/:id/goal" => 'submissions#goals'
+  get "submissions/leaderboard"
   resources :submissions
 
   # The priority is based upon order of creation:
