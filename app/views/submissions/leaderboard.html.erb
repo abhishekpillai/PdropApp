@@ -1,23 +1,30 @@
-<h1>Top Goal Scorers</h1>
+<h1>PuckDrop Leaderboard</h1>
 
-<table border="1" cellspacing="5" cellpadding="5">
+<table border="0" cellspacing="5" cellpadding="5">
 	<tr>
 		<!--<th>Prof Pic</th>-->
+		<th>Rank</th>
 		<th>Username</th>
-		<th># of Goals</th>
+		<th>Goals</th>
 		<th></th>
 	</tr>
-	
+
+<% rank = 1 %>
 	<% @top_users.each do |user| %>
-	<tr>
+
+
 		<!--<td></td>-->
+		<td><%= rank %></td>
 		<td><%= user.username %></td>
 		<td><%= user.total_goals %></td>
 		<td><a href="https://twitter.com/share" class="twitter-share-button" data-text="Guess who is on the leaderboard!!" data-via="Puckdrop" data-count="none">Tweet</a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
 	</tr>
+	<% rank += 1 %>
+	
 	<% end %>
-
+	
 </table>
 
 <%= paginate @submissions %>
+

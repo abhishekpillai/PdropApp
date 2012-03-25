@@ -11,5 +11,4 @@ module SubmissionsHelper
   		return "#{(time_in_seconds/86400).to_i} days"
   	end
   end
-  
 end
