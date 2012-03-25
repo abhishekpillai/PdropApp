@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:show, :index]
+  before_filter :authenticate_user!, :except => [:show, :index, :leaderboard]
 
   def leaderboard
     @top_users = User.order("goals desc").page(params[:page]).per(10)
