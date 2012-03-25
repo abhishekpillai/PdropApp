@@ -2,6 +2,15 @@ class SubmissionsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:show, :index]
 
+  def leaderboard
+    @top_users = User.order("goals desc").page(params[:page]).per(10)
+    respond_to do |format|
+      format.html # leaderboard.html.erb
+      format.json { render json: @top_users }
+    end
+  end
+
+# the 'goals' method adds handles the user voting up action
   def goals
     @submission = Submission.find(params[:id])
     @submission.goals += 1
