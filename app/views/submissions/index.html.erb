@@ -36,9 +36,11 @@
 			<%= link_to image_tag("goal_arrow.png", :class => "arrow"), "/submissions/#{submission.id}/goal", :title => "Vote Up!", :id => dom_id(submission) %>	
 		<% else %>
 			<%= image_tag("arrow_voted.png", :class => "arrow", :title => "You've already voted") %>
-		<% end %>		
-		<%= link_to submission.title, submission.link, :target => '_blank' %><%#= submission.source(submission.link) %>
-    <% if submission.goals != 1%>
+		<% end %>
+				
+		<%= link_to submission.title, submission.link, :target => '_blank' %>  <span id="source"><%= submission.source(submission.link) %></span>
+    
+	  <% if submission.goals != 1%>
 	    <p class="goals"><%= submission.goals %> goals by 
 	  <% elsif %>
 	    <p class="goals"><%= submission.goals %> goal by

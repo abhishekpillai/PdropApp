@@ -1,0 +1,6 @@
+development:
+  oauth_token: DEVELOPMENT_TWITTER_APP_TOKEN
+  oauth_token_secret: DEVELOPMENT_TWITTER_APP_SECRET
+production:
+  oauth_token: PRODUCTION_TWITTER_APP_TOKEN
+  oauth_token_secret: PRODUCTION_TWITTER_APP_SECRET
