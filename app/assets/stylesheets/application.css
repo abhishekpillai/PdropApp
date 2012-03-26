@@ -13,12 +13,12 @@
 */
 
 
-#notice {
-	border: 1px solid green;
+.notice {
+	color: green;
 }
 
-#alert {
-	border: 1px solid red;
+.alert {
+	color: red;
 }
 
 .social_sign_in img {
