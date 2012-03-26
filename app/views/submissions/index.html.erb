@@ -1,4 +1,4 @@
-<nav>
+<nav id="top">
   <ul>
      <li class="title">PuckDrop</li>
     <li class="submit"><%= link_to 'Submit "anything" Hockey', new_submission_path %></li>
@@ -7,12 +7,12 @@
 	<li class="flagged"><%= link_to 'Admin Dashboard', '/submissions/admin' %></li>
 <% end %>
     <li class="login"><% if user_signed_in? %>
-  		Logged in as <%= current_user.username %>
+  		Logged in as <%= link_to current_user.username, user_profile_url(current_user.id) %>
   		(<%= current_user.total_goals%>) <%= link_to " Logout", destroy_user_session_url, method: :delete %>
   	<% else %>
   	<%= link_to "Login", new_user_session_url %></li>
   		<% end %>
-  		<li class="social"><%= link_to image_tag("facebook.png"), "http://www.facebook.com/goPuckdrop", :target => "_blank", :title => "Facebook" %></li>
+  		<li class="social"><%= link_to image_tag("Facebook.png"), "http://www.facebook.com/goPuckdrop", :target => "_blank", :title => "Facebook" %></li>
        <li class="social"><%= link_to image_tag("twitter_bird.png"), "http://twitter.com/PuckDrop", :target => "_blank", :title => "Twitter" %></li>
   </ul>
 </nav>
@@ -31,19 +31,19 @@
 		because of the before filter in the submissions controller -->
 		<% if current_user.present? && !session[:goals].include?(submission.id.to_s) && submission.user.id != current_user.id %>
 
-	    	<%= link_to image_tag("goal_arrow.png", :class => "arrow"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>
+	    	<%= link_to image_tag("goal_arrow.png", :class => "arrow"), "/submissions/#{submission.id}/goal", :title => "Vote Up!", :id => dom_id(submission) %>
   <% elsif current_user.nil? %>
-			<%= link_to image_tag("goal_arrow.png", :class => "arrow"), "/submissions/#{submission.id}/goal", :title => "Goal!", :id => dom_id(submission) %>	
+			<%= link_to image_tag("goal_arrow.png", :class => "arrow"), "/submissions/#{submission.id}/goal", :title => "Vote Up!", :id => dom_id(submission) %>	
 		<% else %>
-		<!-- no voting arrow is shown -->
+			<%= image_tag("arrow_voted.png", :class => "arrow", :title => "You've already voted") %>
 		<% end %>		
 		<%= link_to submission.title, submission.link, :target => '_blank' %><%#= submission.source(submission.link) %>
     <% if submission.goals != 1%>
-	    <p class="goals"><%= submission.goals %> goals by <%= submission.user.username %> |
+	    <p class="goals"><%= submission.goals %> goals by 
 	  <% elsif %>
-	    <p class="goals"><%= submission.goals %> goal by <%= submission.user.username %> |
+	    <p class="goals"><%= submission.goals %> goal by
 	  <% end %>
-		
+		<%= link_to submission.user.username, user_profile_url(submission.user.id) %> |
 		<%= timestamp(submission.created_at) %> ago |
 		
 		<% if submission.flag? %> 

@@ -1,0 +1,55 @@
+<nav id="top">
+  <ul>
+     <li class="title">PuckDrop</li>
+    <li class="submit"><%= link_to 'Submit "anything" Hockey', new_submission_path %></li>
+    <li class="home"><%= link_to 'Home', root_url %></li>
+    <li class="leaderboard"><%= link_to 'Leaderboard', '/submissions/leaderboard' %></li>
+<% if current_user.present? && current_user.admin? %>
+	<li class="flagged"><%= link_to 'Admin Dashboard', '/submissions/admin' %></li>
+<% end %>
+    <li class="login"><% if user_signed_in? %>
+  		Logged in as <%= link_to current_user.username, user_profile_url(current_user.id) %>
+  		(<%= current_user.total_goals%>) <%= link_to " Logout", destroy_user_session_url, method: :delete %>
+  	<% else %>
+  	<%= link_to "Login", new_user_session_url %></li>
+  		<% end %>
+  		<li class="social"><%= link_to image_tag("Facebook.png"), "http://www.facebook.com/goPuckdrop", :target => "_blank", :title => "Facebook" %></li>
+       <li class="social"><%= link_to image_tag("twitter_bird.png"), "http://twitter.com/PuckDrop", :target => "_blank", :title => "Twitter" %></li>
+  </ul>
+</nav>
+
+<h1>Username: <strong><%= @user.username %></strong></h1>
+
+<p>Total Goals: <%= @user.goals %></p>
+
+<% if current_user == @user && @twitter_auth.empty? %>
+	<%= form_tag user_profile_url, :method => "get" do %>
+	  <p>
+	    <%= label_tag :twitter_handle, "Want to share your twitter handle? @" %>
+	    <%= text_field_tag :twitter_handle %>
+	    <%= submit_tag "Submit", :confirm => "Is that correct?" %>
+	  </p>
+	<% end %>
+<% else %>
+	<% @twitter_auth.each do |twitter| %>
+		<h4><%= link_to "@#{twitter.username}", "http://www.twitter.com/#{twitter.username}", :target => "_blank" %></h4>
+	<% end %>
+<% end %>
+
+<h4>Submissions:</h4>
+<ol>
+	<% @user.submissions.each do |submission| %>
+
+	<li><%= link_to submission.title, submission.link, :target => '_blank' %><%#= submission.source(submission.link) %>
+    	
+		<% if submission.goals != 1%>
+	    	<p class="goals"><%= submission.goals %> goals  
+		<% elsif %>
+	    	<p class="goals"><%= submission.goals %> goal
+		<% end %>
+	
+	</li>
+	
+	<% end %>	
+
+</ol>
