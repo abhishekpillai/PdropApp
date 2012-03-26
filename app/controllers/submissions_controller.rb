@@ -52,7 +52,7 @@ class SubmissionsController < ApplicationController
       session[:goals] = []
     end
     
-    @submissions = Submission.order("goals desc").page(params[:page]).per(30)
+    @submissions = Submission.order("goals desc").page(params[:page]).per(9)
     
     respond_to do |format|
       format.html # index.html.erb
