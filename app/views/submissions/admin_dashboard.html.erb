@@ -1,0 +1,19 @@
+<h1>Admin Dashboard</h1>
+<hr/>
+<h3>URGENT! -- Flagged Submissions</h3>
+<ol>
+<% if @submissions.present? %>
+	<% @submissions.each do |submission| %>
+		<li>
+		
+			<%= link_to submission.title, submission.link, :target => '_blank' %><%#= submission.source(submission.link) %>
+		    <p class="goals"><%= submission.goals %> goals by <%= submission.user.username %> <%= timestamp(submission.created_at) %> ago | <strong><%= link_to "Unflag", "/submissions/#{submission.id}/unflag"%></strong></p>
+		
+				<br/><%= link_to 'Show', submission %> <%= link_to 'Edit', edit_submission_path(submission) %> <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
+		</li>
+	<% end %>
+	</ol>
+	<%= paginate @submissions %>
+<% else %>
+	<h3>There are no flagged submissions!</h3>
+<% end %>

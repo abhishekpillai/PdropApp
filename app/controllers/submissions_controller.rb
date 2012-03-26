@@ -1,7 +1,25 @@
 class SubmissionsController < ApplicationController
-
+  
   before_filter :authenticate_user!, :except => [:show, :index, :leaderboard]
-
+  
+  def admin_dashboard
+    @submissions = Submission.where("flag = ?", true).order("created_at desc").page(params[:page]).per(10)
+  end
+  
+  def flag
+    @submission = Submission.find_by_id(params[:id])
+    @submission.flag = true
+    @submission.save
+    redirect_to submissions_url, :notice => "The submission was flagged. Thank you for letting us know!"    
+  end
+  
+  def unflag
+    @submission = Submission.find_by_id(params[:id])
+    @submission.flag = false
+    @submission.save
+    redirect_to "/submissions/admin"
+  end
+  
   def leaderboard
     @top_users = User.order("goals desc").page(params[:page]).per(10)
     respond_to do |format|
