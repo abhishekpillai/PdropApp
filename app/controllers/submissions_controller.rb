@@ -1,6 +1,15 @@
 class SubmissionsController < ApplicationController
   
-  before_filter :authenticate_user!, :except => [:show, :index, :leaderboard]
+  before_filter :authenticate_user!, :except => [:show, :index, :leaderboard, :user_profile]
+  
+  def user_profile
+    @user = User.find_by_id(params[:id])
+    if params[:twitter_handle].present?
+      @user.authentications.build(:provider => "twitter", :username => params[:twitter_handle])
+      @user.save
+    end
+      @twitter_auth = @user.authentications.where(:provider => "twitter")
+  end
   
   def admin_dashboard
     @submissions = Submission.where("flag = ?", true).order("created_at desc").page(params[:page]).per(10)
@@ -21,7 +30,7 @@ class SubmissionsController < ApplicationController
   end
   
   def leaderboard
-    @top_users = User.order("goals desc").page(params[:page]).per(10)
+    @top_users = User.where("goals > 0").limit(25).order("goals desc").page(params[:page]).per(10)
     respond_to do |format|
       format.html # leaderboard.html.erb
       format.json { render json: @top_users }
@@ -52,7 +61,7 @@ class SubmissionsController < ApplicationController
       session[:goals] = []
     end
     
-    @submissions = Submission.order("goals desc").page(params[:page]).per(9)
+    @submissions = Submission.order("goals desc").page(params[:page]).per(25)
     
     respond_to do |format|
       format.html # index.html.erb

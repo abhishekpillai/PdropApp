@@ -10,6 +10,7 @@ PdropApp::Application.routes.draw do
   get "submissions/admin" => 'submissions#admin_dashboard'
   get 'submissions/:id/flag' => 'submissions#flag'
   get 'submissions/:id/unflag' => 'submissions#unflag'
+  get 'submissions/:id/user' => 'submissions#user_profile', as: :user_profile
   resources :submissions
 
   # The priority is based upon order of creation:

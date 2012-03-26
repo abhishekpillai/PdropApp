@@ -36,7 +36,7 @@ class AuthenticationsController < ApplicationController
         flash[:notice] = "Signed in successfully."
         sign_in_and_redirect(:user, authentication.user)
       elsif current_user
-        current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
+        current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'], :username => omniauth['info']['nickname'])
         flash[:notice] = "Authentication successful."
         redirect_to authentications_url
       else

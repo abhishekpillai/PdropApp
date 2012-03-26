@@ -63,7 +63,7 @@ nav li {
 	text-decoration: none;
 }
 
-nav {
+nav#top {
 	border-radius: 8px;
 	margin-top: 10px;
 	background: #cedce7; /* Old browsers */
@@ -117,6 +117,7 @@ ol {
 	margin-top: 10px;
 	font-size: 16px;
 	text-decoration: none;
+	padding-bottom: 40px;
 }
 
 ol li {
@@ -139,14 +140,14 @@ ol li a:visited {
 	position:relative;
 	top: 16px; 
 	}
-	
-.no_arrow { 
-		position:relative;
-		top: 16px; 
-		}
 
 #container {
 	border-radius: 8px;
 	background-color: white;
+	height: 700px;
 		
+}
+
+nav.pagination {
+	padding: 0px 0px 20px 50px;
 }
