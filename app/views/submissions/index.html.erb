@@ -1,6 +1,6 @@
 <nav id="top">
+  <div class="title">PuckDrop</div>
   <ul>
-     <li class="title">PuckDrop</li>
     <li class="submit"><%= link_to 'Submit "anything" Hockey', new_submission_path %></li>
     <li class="leaderboard"><%= link_to 'Leaderboard', '/submissions/leaderboard' %></li>
 <% if current_user.present? && current_user.admin? %>
@@ -16,6 +16,7 @@
        <li class="social"><%= link_to image_tag("twitter_bird.png"), "http://twitter.com/PuckDrop", :target => "_blank", :title => "Twitter" %></li>
   </ul>
 </nav>
+
 <div id="container">
 <div class="notice"><%= notice %></div>
 <div class="alert"><%= alert %></div>
@@ -52,8 +53,8 @@
 			<em>submission flagged</em> 
 		<% else %> 
 			<%= link_to "Flag", "/submissions/#{submission.id}/flag" %> 
-		<% end %>
-		</p>		
+		<% end %>	
+				</p>
 		<% if current_user.present? && current_user.admin? %>
 			<%= link_to 'Show', submission %> <%= link_to 'Edit', edit_submission_path(submission) %> <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
 		<% end %>
