@@ -1,20 +1,9 @@
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=242875362471897";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+<div id="banner">
+  <div class="title">PuckDrop</div>
 <nav id="top">
   <ul>
-    <li class="title">PuckDrop</li>
-    <li class="submit"><%= link_to 'Submit "anything" Hockey', new_submission_path %></li>
+    <li class="submit"><%= link_to 'Submit "Hockey" Stuff', new_submission_path %></li>
     <li class="leaderboard"><%= link_to 'Home', :root %></li>
-<% if current_user.present? && current_user.admin? %>
-	<li class="flagged"><%= link_to 'Admin Dashboard', '/submissions/admin' %></li>
-<% end %>
     <li class="login"><% if user_signed_in? %>
   		Logged in as <%= link_to current_user.username, user_profile_url(current_user.id) %>
   		(<%= current_user.total_goals%>) <%= link_to " Logout", destroy_user_session_url, method: :delete %>
@@ -25,6 +14,7 @@
       <li class="social"><%= link_to image_tag("twitter_bird.png"), "http://twitter.com/PuckDrop", :target => "_blank", :title => "Twitter" %></li>
   </ul>
 </nav>
+</div>
 <div id="container">
 
 <div class="notice"><%= notice %></div>
@@ -52,7 +42,8 @@
 	<% rank += 1 %>
 	<% end %>	
 </table>
-
-<div class="fb-like" data-href="http://puckdrop.net/submissions/leaderboard" data-send="true" data-width="450" data-show-faces="false"></div>
 </div>
+<footer>
+  <div class="fb-like" data-href="http://PuckDrop.net" data-send="false" data-width="450" data-show-faces="true"></div>
+</footer>
 
