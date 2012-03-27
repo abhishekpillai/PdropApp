@@ -22,14 +22,22 @@ body {
 
 
 .title {
+	margin: 8px;
+	padding: 8px;
 	font-size: 26px;
 	font-weight: bold;
 	color: #2F3132;
+	float: left;
+	clear: both;
 } 
 
+nav#top { 
+	margin-top: 10px;
+	padding-top: 6px;
+}
 
-
-li.submit {
+nav#top li.submit {
+	margin-left: 15px;
 	padding: 10px;
 	border-radius: 10px;
 	font-size: 16px;
@@ -56,17 +64,16 @@ nav li a {
 	color: white;
 	
 }
-nav li {
-	margin: 6px 10px 0 0;
+nav#top li {
 	color: white;
 	font-size: 16px;
 	display: inline;
 	text-decoration: none;
 }
 
-nav#top {
+
+#banner {
 	border-radius: 8px;
-	margin-top: 10px;
 	background: #cedce7; /* Old browsers */
 	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NlZGNlNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM1OTZhNzIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
@@ -77,32 +84,24 @@ nav#top {
 	background: -ms-linear-gradient(top,  #cedce7 0%,#596a72 100%); /* IE10+ */
 	background: linear-gradient(top,  #cedce7 0%,#596a72 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72',GradientType=0 ); /* IE6-8 */
-	height: 50px;
-	padding-top: 6px;
+	height: 56px;
 }
 
-nav ul {
-	float: right;
-	margin: 0;
-	padding: 8px 4px;
-}
-
-/*li.login{
-	float: right;
-	margin: 6px 70px 0 0; 
-} */
 
 li.login :hover {
 	color: black;
 }
 
-/* li.leaderboard {
-	position: relative;
-	margin: 6px 0 0 100px;
-} */
+li.leaderboard {
+	margin: 0 40px;
+} 
 
 li.leaderboard :hover {
 	color: black;	
+}
+
+nav li.social{
+	float: right;
 }
 
 li.social :hover {
@@ -117,6 +116,7 @@ li.social :hover {
 
 ol {
 	margin-top: 10px;
+	padding-top: 10px;
 	font-size: 16px;
 	text-decoration: none;
 	padding-bottom: 40px;
@@ -157,3 +157,4 @@ nav.pagination {
 #source {
 	font: 70% "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
 }
+
