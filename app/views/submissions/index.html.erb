@@ -3,6 +3,7 @@
   <nav id="top">
   <ul>
     <li class="submit"><%= link_to 'Submit "Hockey" Stuff', new_submission_path %></li>
+    <li class="recent"><%= link_to 'Most Recent', '/submissions/recent' %></li>
     <li class="leaderboard"><%= link_to 'Leaderboard', '/submissions/leaderboard' %></li>
     <li class="login"><% if user_signed_in? %>
   		Logged in as <%= link_to current_user.username, user_profile_url(current_user.id) %>

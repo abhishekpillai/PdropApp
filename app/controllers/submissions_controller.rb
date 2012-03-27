@@ -1,6 +1,19 @@
 class SubmissionsController < ApplicationController
   
-  before_filter :authenticate_user!, :except => [:show, :index, :leaderboard, :user_profile]
+  before_filter :authenticate_user!, :except => [:show, :index, :leaderboard, :user_profile, :recent]
+  
+  def recent
+    if !session[:goals].present?
+      session[:goals] = []
+    end
+    
+    @submissions = Submission.order("created_at desc").page(params[:page]).per(10)
+    
+    respond_to do |format|
+      format.html { render 'index' }# index.html.erb
+      format.json { render json: @submissions }
+    end
+  end
   
   def user_profile
     @user = User.find_by_id(params[:id])

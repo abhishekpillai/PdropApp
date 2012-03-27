@@ -3,7 +3,8 @@
      <li class="title">PuckDrop</li>
     <li class="submit"><%= link_to 'Submit "anything" Hockey', new_submission_path %></li>
     <li class="home"><%= link_to 'Home', root_url %></li>
-    <li class="leaderboard"><%= link_to 'Leaderboard', '/submissions/leaderboard' %></li>
+    <li class="recent"><%= link_to 'Most Recent', '/submissions/recent' %></li>    
+	<li class="leaderboard"><%= link_to 'Leaderboard', '/submissions/leaderboard' %></li>
 <% if current_user.present? && current_user.admin? %>
 	<li class="flagged"><%= link_to 'Admin Dashboard', '/submissions/admin' %></li>
 <% end %>
