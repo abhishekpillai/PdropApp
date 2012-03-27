@@ -20,11 +20,12 @@ body {
 	height: 1260px;
 }
 
-li.title {
+
+.title {
 	font-size: 26px;
 	font-weight: bold;
 	color: #2F3132;
-}
+} 
 
 
 
@@ -81,6 +82,7 @@ nav#top {
 }
 
 nav ul {
+	float: right;
 	margin: 0;
 	padding: 8px 4px;
 }
