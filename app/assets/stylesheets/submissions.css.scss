@@ -17,13 +17,15 @@ body {
 	background: -ms-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* IE10+ */
 	background: linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-8 */
+	height: 1260px;
 }
 
-li.title {
+
+.title {
 	font-size: 26px;
 	font-weight: bold;
 	color: #2F3132;
-}
+} 
 
 
 
@@ -45,6 +47,9 @@ li.submit {
 	border: 2px solid #2F3132;
 }
 
+li.submit :hover {
+    color: black;
+}
 
 nav li a {
 	text-decoration: none;
@@ -77,6 +82,7 @@ nav#top {
 }
 
 nav ul {
+	float: right;
 	margin: 0;
 	padding: 8px 4px;
 }
@@ -96,8 +102,12 @@ li.login :hover {
 } */
 
 li.leaderboard :hover {
-	color: black;
-	
+	color: black;	
+}
+
+li.social :hover {
+	border-radius: 8px;
+	background-color: white;
 }
 
 
@@ -136,6 +146,7 @@ ol li a:visited {
 #container {
 	border-radius: 8px;
 	background-color: white;
+	height: 700px;
 		
 }
 

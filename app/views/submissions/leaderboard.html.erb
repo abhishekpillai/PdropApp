@@ -16,13 +16,13 @@
 	<li class="flagged"><%= link_to 'Admin Dashboard', '/submissions/admin' %></li>
 <% end %>
     <li class="login"><% if user_signed_in? %>
-  		Logged in as <%= current_user.username, user_profile_url(current_user.id) %>
+  		Logged in as <%= link_to current_user.username, user_profile_url(current_user.id) %>
   		(<%= current_user.total_goals%>) <%= link_to " Logout", destroy_user_session_url, method: :delete %>
   	<% else %>
   	<%= link_to "Login", new_user_session_url %></li>
   		<% end %>
-  		<li><%= link_to image_tag("facebook.png"), "http://www.facebook.com/goPuckdrop", :target => "_blank", :title => "Facebook" %></li>
-      <li><%= link_to image_tag("twitter_bird.png"), "http://twitter.com/PuckDrop", :target => "_blank", :title => "Twitter" %></li>
+  		<li class="social"><%= link_to image_tag("facebook.png"), "http://www.facebook.com/goPuckdrop", :target => "_blank", :title => "Facebook" %></li>
+      <li class="social"><%= link_to image_tag("twitter_bird.png"), "http://twitter.com/PuckDrop", :target => "_blank", :title => "Twitter" %></li>
   </ul>
 </nav>
 <div id="container">
@@ -31,21 +31,21 @@
 <div  class="alert"><%= alert %></div>
 
 
-<table border="0" cellspacing="5" cellpadding="5">
+<table border="0" cellspacing="2" cellpadding="2">
 	<tr>
 	  <tr><th colspan="2"><h2>Scoring Leaders</h2></th></tr>
 		<!--<th>Prof Pic</th>-->
 		<th>Rank</th>
-		<th>Username</th>
-		<th>Goals</th>
+		<th class="username">Username</th>
+		<th class="goal">Goal</th>
 	</tr>
 
 <% rank = 1 %>
 	<% @top_users.each do |user| %>
-		<!--<td></td>-->
-		<td><%= rank %></td>
+	  <!--<td></td>-->
+		<td class="table"><%= rank %></td>
 		<td><%= user.username %></td>
-		<td><%= user.total_goals %></td>
+		<td class="table"><%= user.total_goals %></td>
 		<td><a href="https://twitter.com/share" class="twitter-share-button" data-text="Guess who is on the leaderboard!!" data-via="Puckdrop" data-count="none">Tweet</a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
 	</tr>
