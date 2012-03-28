@@ -12,3 +12,24 @@ th.username {
 	bottom: 0;
 	padding: 8px;
 }
+
+li.home {
+	margin-left: 15px;
+}
+
+td.username a:link {
+	text-decoration: none;
+	font-size: 16px;
+}
+
+
+
+td.username a:visited {
+	color: #919eaa;
+	text-decoration: none;
+}
+
+td.username a:hover {
+	color: black;
+	text-decoration: none;
+}

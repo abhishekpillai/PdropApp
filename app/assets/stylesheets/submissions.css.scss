@@ -33,11 +33,11 @@ body {
 
 nav#top { 
 	margin-top: 10px;
-	padding-top: 6px;
+	padding-top: 8px;
 }
 
 nav#top li.submit {
-	margin-left: 15px;
+	margin-left: 10px;
 	padding: 10px;
 	border-radius: 10px;
 	font-size: 16px;
@@ -87,24 +87,44 @@ nav#top li {
 	height: 56px;
 }
 
+li.home {
+	margin-left: 10px;
+}
 
-li.login :hover {
-	color: black;
+li.recent {
+	margin-left: 15px;
 }
 
 li.leaderboard {
-	margin: 0 40px;
+	margin-left: 15px;
 } 
+
+li.login {
+	margin-left: 15px;
+}
+
+li.home :hover {
+	color: black;
+}
+
+li.recent :hover {
+	color: black;
+}
 
 li.leaderboard :hover {
 	color: black;	
 }
 
-nav li.social{
-	float: right;
+li.login :hover {
+	color: black;
 }
 
-li.social :hover {
+.social {
+	float: right;
+ 
+}
+
+.social :hover {
 	border-radius: 8px;
 	background-color: white;
 }

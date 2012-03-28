@@ -1,21 +1,4 @@
-<div id="banner">
-  <div class="title">PuckDrop</div>
-<nav id="top">
-  <ul>
-    <li class="submit"><%= link_to 'Submit "Hockey" Stuff', new_submission_path %></li>
-    <li class="recent"><%= link_to 'Most Recent', '/submissions/recent' %></li>
-    <li class="leaderboard"><%= link_to 'Home', :root %></li>
-    <li class="login"><% if user_signed_in? %>
-  		Logged in as <%= link_to current_user.username, user_profile_url(current_user.id) %>
-  		(<%= current_user.total_goals%>) <%= link_to " Logout", destroy_user_session_url, method: :delete %>
-  	<% else %>
-  	<%= link_to "Login", new_user_session_url %></li>
-  		<% end %>
-  		<li class="social"><%= link_to image_tag("facebook.png"), "http://www.facebook.com/goPuckdrop", :target => "_blank", :title => "Facebook" %></li>
-      <li class="social"><%= link_to image_tag("twitter_bird.png"), "http://twitter.com/PuckDrop", :target => "_blank", :title => "Twitter" %></li>
-  </ul>
-</nav>
-</div>
+<%= render 'header' %>
 <div id="container">
 
 <div class="notice"><%= notice %></div>
@@ -35,16 +18,13 @@
 	<% @top_users.each do |user| %>
 	  <!--<td></td>-->
 		<td class="table"><%= rank %></td>
-		<td><%= user.username %></td>
+		<td class="username"><%= link_to user.username, user_profile_url(user.id) %></td>
 		<td class="table"><%= user.total_goals %></td>
-		<td><a href="https://twitter.com/share" class="twitter-share-button" data-text="Guess who is on the leaderboard!!" data-via="Puckdrop" data-count="none">Tweet</a>
+		<td><a href="https://twitter.com/share" class="twitter-share-button" data-text= "<%= user.username %> is on the PuckDrop.net leaderboard! http://PuckDrop.Net/submissions/leaderboard #Hockey #PuckDrop" data-via="Puckdrop" data-count="none">Tweet</a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
 	</tr>
 	<% rank += 1 %>
 	<% end %>	
 </table>
 </div>
-<footer>
-  <div class="fb-like" data-href="http://PuckDrop.net" data-send="false" data-width="450" data-show-faces="true"></div>
-</footer>
-
+<%= render 'footer' %>

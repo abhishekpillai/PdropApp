@@ -1,6 +1,8 @@
+
+<div id="banner">
+  <div class="title">PuckDrop</div>
 <nav id="top">
   <ul>
-     <li class="title">PuckDrop</li>
     <li class="submit"><%= link_to 'Submit "anything" Hockey', new_submission_path %></li>
     <li class="home"><%= link_to 'Home', root_url %></li>
     <li class="recent"><%= link_to 'Most Recent', '/submissions/recent' %></li>    
@@ -18,10 +20,11 @@
        <li class="social"><%= link_to image_tag("twitter_bird.png"), "http://twitter.com/PuckDrop", :target => "_blank", :title => "Twitter" %></li>
   </ul>
 </nav>
-
-<h1>Username: <strong><%= @user.username %></strong></h1>
-
-<p>Total Goals: <%= @user.goals %></p>
+</div>
+<div id="container">
+<div id="profile">
+<h2>Username: <%= @user.username %></h2>
+<h2>Total Goals: <%= @user.goals %></h2>
 
 <% if current_user == @user && @twitter_auth.empty? %>
 	<%= form_tag user_profile_url, :method => "get" do %>
@@ -33,24 +36,25 @@
 	<% end %>
 <% else %>
 	<% @twitter_auth.each do |twitter| %>
-		<h4><%= link_to "@#{twitter.username}", "http://www.twitter.com/#{twitter.username}", :target => "_blank" %></h4>
+		<h3>Twitter: <%= link_to "@#{twitter.username}", "http://www.twitter.com/#{twitter.username}", :target => "_blank" %></h3>
 	<% end %>
 <% end %>
 
-<h4>Submissions:</h4>
+<h3>Submissions:</h3>
 <ol>
 	<% @user.submissions.each do |submission| %>
-
-	<li><%= link_to submission.title, submission.link, :target => '_blank' %><%#= submission.source(submission.link) %>
-    	
-		<% if submission.goals != 1%>
-	    	<p class="goals"><%= submission.goals %> goals  
+	<li><%= link_to submission.title, submission.link, :target => '_blank' %> <span id="source"><%= submission.source(submission.link) %>
+    <% if submission.goals != 1%>
+	  <%= submission.goals %> goals  
 		<% elsif %>
-	    	<p class="goals"><%= submission.goals %> goal
-		<% end %>
+	  <%= submission.goals %> goal
+		<% end %></span>
 	
 	</li>
 	
 	<% end %>	
 
 </ol>
+</div>
+</div>
+<%= render 'footer' %>
