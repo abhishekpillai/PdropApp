@@ -124,6 +124,22 @@ class SubmissionsController < ApplicationController
     
     respond_to do |format|
       if @submission.save
+          Twitter.configure do |config|
+            config.consumer_key = "oufoklXgcH2CDPkx3YQIvw"
+            config.consumer_secret = "wZqTlgJlSXDozZrhuSwRo08PmRRQxGs5v1h30nZjE"
+            config.oauth_token = "38383359-rOmM3yZIwdfpHBzy4I0HQIb8FEQwcElheQnCDered"
+            config.oauth_token_secret = "Qh3PAXnyYlYdP87POiX6LSIADzNagZOUmtIOtLeeh8I"
+          end
+          
+          begin
+            short_title = @submission.title.slice(0,28)
+            Twitter.update("#{short_title} via PuckDrop.Net #Hockey")
+            puts "AUTO-TWEET WORKED!"
+          rescue => error
+            puts error
+            puts "AUTO-TWEET DID NOT WORK!"
+          end
+        
         format.html { redirect_to root_url, notice: 'Nice goal!' }
         format.json { render json: @submission, status: :created, location: @submission }
       else
