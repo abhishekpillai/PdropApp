@@ -164,6 +164,6 @@ DEPENDENCIES
   rails (= 3.2.1)
   sass-rails (~> 3.2.3)
   sqlite3
-  twitter
   thin
+  twitter
   uglifier (>= 1.0.3)

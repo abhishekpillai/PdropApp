@@ -125,10 +125,10 @@ class SubmissionsController < ApplicationController
     respond_to do |format|
       if @submission.save
           Twitter.configure do |config|
-            config.consumer_key = "oufoklXgcH2CDPkx3YQIvw"
-            config.consumer_secret = "wZqTlgJlSXDozZrhuSwRo08PmRRQxGs5v1h30nZjE"
-            config.oauth_token = "38383359-rOmM3yZIwdfpHBzy4I0HQIb8FEQwcElheQnCDered"
-            config.oauth_token_secret = "Qh3PAXnyYlYdP87POiX6LSIADzNagZOUmtIOtLeeh8I"
+            config.consumer_key = ENV['PdropApp_TWITTER_KEY']
+            config.consumer_secret = ENV['PdropApp_TWITTER_SECRET']
+            config.oauth_token = ENV['PdropApp_TWITTER_TOKEN']
+            config.oauth_token_secret = ENV['PdropApp_TWITTER_TOKEN_SECRET']
           end
           
           begin

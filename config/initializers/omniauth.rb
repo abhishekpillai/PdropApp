@@ -1,5 +1,5 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :twitter, 'oufoklXgcH2CDPkx3YQIvw', 'wZqTlgJlSXDozZrhuSwRo08PmRRQxGs5v1h30nZjE'
-  provider :facebook, '224267607670777', '235b57019c7a55a14025972719dafc5b', :scope => 'email,offline_access,publish_stream', :display => 'popup'
+  provider :twitter, ENV['PdropApp_TWITTER_KEY'], ENV['PdropApp_TWITTER_SECRET']
+  provider :facebook, ENV['PdropApp_FACEBOOK_KEY'], ENV['PdropApp_FACEBOOK_SECRET'], :scope => 'email,offline_access,publish_stream', :display => 'popup'
   # provider :linked_in, 'CONSUMER_KEY', 'CONSUMER_SECRET'
 end
