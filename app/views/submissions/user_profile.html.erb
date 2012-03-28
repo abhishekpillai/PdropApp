@@ -11,8 +11,8 @@
 	<li class="flagged"><%= link_to 'Admin Dashboard', '/submissions/admin' %></li>
 <% end %>
     <li class="login"><% if user_signed_in? %>
-  		Logged in as <%= link_to current_user.username, user_profile_url(current_user.id) %>
-  		(<%= current_user.total_goals%>) <%= link_to " Logout", destroy_user_session_url, method: :delete %>
+  		<%= link_to current_user.username, user_profile_url(current_user.id) %>
+  		(<%= current_user.total_goals%>) | <%= link_to " Logout", destroy_user_session_url, method: :delete %>
   	<% else %>
   	<%= link_to "Login", new_user_session_url %></li>
   		<% end %>

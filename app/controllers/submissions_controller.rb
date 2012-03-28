@@ -21,7 +21,7 @@ class SubmissionsController < ApplicationController
       @user.authentications.build(:provider => "twitter", :username => params[:twitter_handle])
       @user.save
     end
-      @twitter_auth = @user.authentications.where(:provider => "twitter")
+      @twitter_auth = @user.authentications.find_by_provider(:provider => "twitter")
   end
   
   def admin_dashboard
