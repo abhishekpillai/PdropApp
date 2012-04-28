@@ -136,7 +136,7 @@ class SubmissionsController < ApplicationController
           end
           
           begin
-            short_title = @submission.title.slice(0,28)
+            short_title = @submission.title.slice(0,100)
             Twitter.update("#{short_title} via PuckDrop.Net #Hockey")
             puts "AUTO-TWEET WORKED!"
           rescue => error
