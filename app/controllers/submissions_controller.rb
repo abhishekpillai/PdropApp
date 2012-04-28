@@ -116,9 +116,13 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(params[:submission])
     @submission.goals = 1
     
-    check_http = @submission.link.split("www")
-    if check_http[0] == "http://"
-    else
+    # check_http = @submission.link.split("www")
+    # if check_http[0] == "http://"
+    # else
+    #   @submission.link = "http://" + @submission.link
+    # end
+    
+    if !@submission.starts_with?('http://')
       @submission.link = "http://" + @submission.link
     end
     
