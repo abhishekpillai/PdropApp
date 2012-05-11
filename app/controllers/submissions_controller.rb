@@ -74,7 +74,8 @@ class SubmissionsController < ApplicationController
       session[:goals] = []
     end
     
-    @submissions = Submission.order("goals desc").page(params[:page]).per(20)
+    @submissions = Submission.order("goals desc").page(params[:page]).per(5)
+    params[:page].present? ? @page = params[:page].to_i : @page = 1
     
     respond_to do |format|
       format.html # index.html.erb
@@ -137,7 +138,7 @@ class SubmissionsController < ApplicationController
           
           begin
             short_title = @submission.title.slice(0,100)
-            Twitter.update("#{short_title} via PuckDrop.Net #Hockey")
+            Twitter.update("#{short_title} via PuckDrop.Net #Hockey"  )
             puts "AUTO-TWEET WORKED!"
           rescue => error
             puts error
