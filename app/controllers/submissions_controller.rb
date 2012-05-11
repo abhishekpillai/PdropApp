@@ -8,6 +8,7 @@ class SubmissionsController < ApplicationController
     end
     
     @submissions = Submission.order("created_at desc").page(params[:page]).per(30)
+    params[:page].present? ? @page = params[:page].to_i : @page = 1
     
     respond_to do |format|
       format.html { render 'index' }# index.html.erb
@@ -74,7 +75,7 @@ class SubmissionsController < ApplicationController
       session[:goals] = []
     end
     
-    @submissions = Submission.order("goals desc").page(params[:page]).per(5)
+    @submissions = Submission.order("goals desc").page(params[:page]).per(15)
     params[:page].present? ? @page = params[:page].to_i : @page = 1
     
     respond_to do |format|

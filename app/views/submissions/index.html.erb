@@ -1,49 +1,51 @@
-<%= render 'header' %>
+
+
+
+
 <div id="container">
-<div class="notice"><%= notice %></div>
-<div class="alert"><%= alert %></div>
+  <div class="hero-unit">
+    <ol start="<%= 15*(@page-1)+1 %>">
+    <% @submissions.each do |submission| %>
+    		<li>		
+    	<!-- IF there is a user logged in and 
+    		has not given any goals to the submission during the current session and 
+    		if the user has not submitted this particular submission, allow them to vote up. 
 
-<ol start="<%= 5*(@page-1)+1 %>">
-<% @submissions.each do |submission| %>
-		<li>		
-	<!-- IF there is a user logged in and 
-		has not given any goals to the submission during the current session and 
-		if the user has not submitted this particular submission, allow them to vote up. 
+    		ELSIF - a user who is not logged in, is show the vote up arrow but will have to sign in or sign up before continuing
+    		because of the before filter in the submissions controller -->
+    		<% if current_user.present? && !session[:goals].include?(submission.id.to_s) && submission.user.id != current_user.id %>
 
-		ELSIF - a user who is not logged in, is show the vote up arrow but will have to sign in or sign up before continuing
-		because of the before filter in the submissions controller -->
-		<% if current_user.present? && !session[:goals].include?(submission.id.to_s) && submission.user.id != current_user.id %>
+    	    	<%= link_to image_tag("goal_arrow.png", :class => "arrow"), "/submissions/#{submission.id}/goal", :title => "Vote Up!", :id => dom_id(submission) %>
+      <% elsif current_user.nil? %>
+    			<%= link_to image_tag("goal_arrow.png", :class => "arrow"), "/submissions/#{submission.id}/goal", :title => "Vote Up!", :id => dom_id(submission) %>	
+    		<% else %>
+    			<%= image_tag("arrow_voted.png", :class => "arrow", :title => "You've already voted") %>
+    		<% end %>
 
-	    	<%= link_to image_tag("goal_arrow.png", :class => "arrow"), "/submissions/#{submission.id}/goal", :title => "Vote Up!", :id => dom_id(submission) %>
-  <% elsif current_user.nil? %>
-			<%= link_to image_tag("goal_arrow.png", :class => "arrow"), "/submissions/#{submission.id}/goal", :title => "Vote Up!", :id => dom_id(submission) %>	
-		<% else %>
-			<%= image_tag("arrow_voted.png", :class => "arrow", :title => "You've already voted") %>
-		<% end %>
 				
-		<%= link_to submission.title, submission.link, :target => '_blank' %>  <span id="source"> <%= submission.source(submission.link) %></span>
+    		<%= link_to submission.title, submission.link, :target => '_blank' %>  <span id="source"> <%= submission.source(submission.link) %></span>
     
-	  <% if submission.goals != 1%>
-	    <p class="goals"><%= submission.goals %> goals by 
-	  <% elsif %>
-	    <p class="goals"><%= submission.goals %> goal by
-	  <% end %>
-		<%= link_to submission.user.username, user_profile_url(submission.user.id) %> |
-		<%= timestamp(submission.created_at) %> ago |
+    	  <% if submission.goals != 1%>
+    	    <p class="goals"><%= submission.goals %> goals by 
+    	  <% elsif %>
+    	    <p class="goals"><%= submission.goals %> goal by
+    	  <% end %>
+    		<%= link_to submission.user.username, user_profile_url(submission.user.id) %> |
+    		<%= timestamp(submission.created_at) %> ago |
 
-		<% if submission.flag? %> 
-			<em>submission flagged</em> 
-		<% else %> 
-			<%= link_to "Flag", "/submissions/#{submission.id}/flag" %> 
-		<% end %>	
+    		<% if submission.flag? %> 
+    			<em>submission flagged</em> 
+    		<% else %> 
+    			<%= link_to "Flag", "/submissions/#{submission.id}/flag" %> 
+    		<% end %>	
 		
-		<% if current_user.present? && current_user.admin? %>
-			<%= link_to 'Show', submission %> <%= link_to 'Edit', edit_submission_path(submission) %> <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
-		<% end %>
-		</p>
-		</li>
-<% end %>
-</ol>
-<%= paginate @submissions %>
+    		<% if current_user.present? && current_user.admin? %>
+    			<%= link_to 'Show', submission %> <%= link_to 'Edit', edit_submission_path(submission) %> <%= link_to 'Destroy', submission, confirm: 'Are you sure?', method: :delete %>
+    		<% end %>
+    		</p>
+    		</li>
+    <% end %>
+    </ol>
+    <%= paginate @submissions %>
+  </div>
 </div>
-<%= render 'footer' %>

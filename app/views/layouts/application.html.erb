@@ -1,43 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href='http://fonts.googleapis.com/css?family=Karla' rel='stylesheet' type='text/css'>
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-28443598-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-  <script type="text/javascript">var _kiq = _kiq || [];</script>
-  <script type="text/javascript" src="//s3.amazonaws.com/ki.js/32573/6ln.js" async="true"></script>
+  
+  <title>PuckDrop.net | The Puck Drops Here!</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <!--[if gte IE 9]>
-    <style type="text/css">
-      .gradient {
-         filter: none;
-      }
-    </style>
-  <![endif]-->
-    <title>PuckDrop.net | The Puck Drops Here!</title>
+  <%= render 'layouts/script' %>
+  <%= render 'layouts/shim' %>
+
 </head>
 <body>
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=224267607670777";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
+  <%= render 'layouts/header' %>
+  <%= render 'layouts/facebook' %>
+  
   <% if current_user.present? && current_user.admin? %>
   <%= link_to 'Admin Dashboard', '/submissions/admin' %>
   <% end %>
-<%= yield %>
+  <%= yield %>
+  <%= render 'layouts/footer' %>
 </body>
 </html>
