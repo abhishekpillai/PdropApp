@@ -7,7 +7,7 @@ class SubmissionsController < ApplicationController
       session[:goals] = []
     end
     
-    @submissions = Submission.order("created_at desc").page(params[:page]).per(10)
+    @submissions = Submission.order("created_at desc").page(params[:page]).per(30)
     
     respond_to do |format|
       format.html { render 'index' }# index.html.erb
@@ -25,7 +25,7 @@ class SubmissionsController < ApplicationController
   end
   
   def admin_dashboard
-    @submissions = Submission.where("flag = ?", true).order("created_at desc").page(params[:page]).per(10)
+    @submissions = Submission.where("flag = ?", true).order("created_at desc").page(params[:page]).per(30)
   end
   
   def flag
@@ -43,7 +43,7 @@ class SubmissionsController < ApplicationController
   end
   
   def leaderboard
-    @top_users = User.where("goals > 0").limit(25).order("goals desc").page(params[:page]).per(10)
+    @top_users = User.where("goals > 0").limit(25).order("goals desc").page(params[:page]).per(25)
     respond_to do |format|
       format.html # leaderboard.html.erb
       format.json { render json: @top_users }
@@ -74,7 +74,8 @@ class SubmissionsController < ApplicationController
       session[:goals] = []
     end
     
-    @submissions = Submission.order("goals desc").page(params[:page]).per(10)
+    @submissions = Submission.order("goals desc").page(params[:page]).per(5)
+    params[:page].present? ? @page = params[:page].to_i : @page = 1
     
     respond_to do |format|
       format.html # index.html.erb
@@ -116,9 +117,13 @@ class SubmissionsController < ApplicationController
     @submission = Submission.new(params[:submission])
     @submission.goals = 1
     
-    check_http = @submission.link.split("www")
-    if check_http[0] == "http://"
-    else
+    # check_http = @submission.link.split("www")
+    # if check_http[0] == "http://"
+    # else
+    #   @submission.link = "http://" + @submission.link
+    # end
+    
+    if !@submission.starts_with?('http://')
       @submission.link = "http://" + @submission.link
     end
     
@@ -132,8 +137,8 @@ class SubmissionsController < ApplicationController
           end
           
           begin
-            short_title = @submission.title.slice(0,28)
-            Twitter.update("#{short_title} via PuckDrop.Net #Hockey")
+            short_title = @submission.title.slice(0,100)
+            Twitter.update("#{short_title} via PuckDrop.Net #Hockey"  )
             puts "AUTO-TWEET WORKED!"
           rescue => error
             puts error
