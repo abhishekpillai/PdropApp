@@ -20,7 +20,7 @@
 		<td class="table"><%= rank %></td>
 		<td class="username"><%= link_to user.username, user_profile_url(user.id) %></td>
 		<td class="table"><%= user.total_goals %></td>
-		<td><a href="https://twitter.com/share" class="twitter-share-button" data-text= "<%= user.username %> is on the PuckDrop.net leaderboard! http://PuckDrop.Net/submissions/leaderboard #Hockey #PuckDrop" data-via="Puckdrop" data-count="none">Tweet</a>
+		<td><a href="https://twitter.com/share" class="twitter-share-button" data-text= "<%= user.username %> is on the PuckDrop.net leaderboard! #Hockey" data-via="Puckdrop" data-count="none">Tweet</a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></td>
 	</tr>
 	<% rank += 1 %>
