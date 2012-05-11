@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  attr_accessible :username, :goal
   
   has_many :authentications, :dependent => :destroy
   

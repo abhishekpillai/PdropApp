@@ -20,6 +20,8 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'kaminari'
 gem 'twitter'
+gem 'faker', '1.0.1'
+gem "twitter-bootstrap-rails"
 
 # Gems used only for assets and not required
 # in production environments by default.
